@@ -9,6 +9,6 @@ http.createServer(function(request, response){
   console.log('Started ' + pid);
 });
 
-setTimeout(function(){
-  throw new Error("Simulated error")
-}, Math.ceil(Math.random() * 3) * 1000);
+// setTimeout(function(){
+//   throw new Error("Simulated error")
+// }, Math.ceil(Math.random() * 3) * 1000);

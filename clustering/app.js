@@ -8,3 +8,7 @@ http.createServer(function(request, response){
 }).listen(8080, function(){
   console.log('Started ' + pid);
 });
+
+setTimeout(function(){
+  throw new Error("Simulated error")
+}, Math.ceil(Math.random() * 3) * 1000);

@@ -6,6 +6,13 @@ if (cluster.isMaster){
   for (var i = 0; i < cpus; i++){
     cluster.fork();
   }
+
+  cluster.on('exit', function(worker, code){
+    if (code !== 0 && !worker.suicide) {
+      console.log('Worker has crashed. Starting a new worker.');
+      cluster.fork();
+    }
+  });
 } else {
   require('./app');
 }

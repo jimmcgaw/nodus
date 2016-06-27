@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Socket.IO</title>
+  </head>
+  <body>
+
+    <button id="augmenter">Click Me!</button>
+
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      var socket = io.connect('/');
+      socket.on('connected', function(){
+        console.log('connected to socket server');
+      });
+      var number = 0;
+      document.getElementById('augmenter').addEventListener('click', function(){
+        number++;
+        socket.emit('event', { 'number': number });
+      });
+    </script>
+  </body>
+</html>

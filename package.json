@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "forever": "^0.15.2",
-    "node-static": "^0.7.7"
+    "node-static": "^0.7.7",
+    "socket.io": "^1.4.8"
   }
 }

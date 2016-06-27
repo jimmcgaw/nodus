@@ -36,6 +36,10 @@ var eventHandler = function(data){
 var handleIO = function(socket){
   socket.on('event', eventHandler);
   socket.on('disconnect', disconnect);
+
+  setInterval(function(){
+    socket.emit('random', Math.random());
+  }, 1000);
 }
 
 io.on('connection', handleIO);

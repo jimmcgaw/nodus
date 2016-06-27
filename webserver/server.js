@@ -1,14 +1,21 @@
 var http = require("http");
+var NodeStatic = require('node-static');
+
+var staticFiles = new NodeStatic.Server(__dirname);
 
 function handleHTTP(request, response){
+  console.log(request.method, request.url);
+
   if (request.method === 'GET'){
-    console.log('GET /');
+    request.addListener('end', function(){
+      request.url = 'hello.txt';
+      staticFiles.serve(response, request);
+    });
+    request.resume();
+  } else {
+    response.writeHead(403);
+    response.end("Unsupported request");
   }
-  if (request.method === 'POST'){
-    console.log('POST /');
-  }
-  response.writeHead(200, { "Content-type": "text/plain"});
-  response.end("hello world");
 }
 
 var port = 9090;

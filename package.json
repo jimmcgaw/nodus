@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
-    "forever": "^0.15.2"
+    "forever": "^0.15.2",
+    "node-static": "^0.7.7"
   }
 }

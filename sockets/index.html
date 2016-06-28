@@ -6,13 +6,17 @@
   </head>
   <body>
 
+    <input type="text" value="" id="user-input">
     <button id="augmenter">Click Me!</button>
 
-    <div></div>
+    <div id="messages"></div>
 
-    <div id="randoms">
 
-    </div>
+      <div></div>
+
+      <div id="randoms"></div>
+
+      <div></div>
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
@@ -20,10 +24,21 @@
       socket.on('connected', function(){
         console.log('connected to socket server');
       });
-      var number = 0;
+      var userInputControl = document.getElementById('user-input');
+      var messagesBox = document.getElementById('messages');
+
       document.getElementById('augmenter').addEventListener('click', function(){
-        number++;
-        socket.emit('event', { 'number': number });
+        var userInput = userInputControl.value;
+        if (userInput){
+          socket.emit('message', userInput);
+          userInputControl.value = "";
+          messagesBox.innerHTML += userInput + '<br>';
+        }
+      });
+
+      socket.on('messages', function(message){
+        console.log(message);
+        messagesBox.innerHTML += message + '<br>';
       });
 
       var randoms = document.getElementById('randoms');

@@ -29,12 +29,12 @@ var disconnect = function(){
   console.log('client has disconnected');
 }
 
-var eventHandler = function(data){
-  console.log(data);
+var eventHandler = function(message){
+  this.broadcast.emit("messages", message);
 }
 
 var handleIO = function(socket){
-  socket.on('event', eventHandler);
+  socket.on('message', eventHandler);
   socket.on('disconnect', disconnect);
 
   setInterval(function(){
